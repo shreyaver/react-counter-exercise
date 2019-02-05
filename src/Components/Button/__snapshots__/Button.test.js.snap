@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button renders without crashing 1`] = `
+<button
+  className="button"
+  style={
+    Object {
+      "color": "#fff",
+    }
+  }
+  type="button"
+>
+  Click Me
+</button>
+`;
