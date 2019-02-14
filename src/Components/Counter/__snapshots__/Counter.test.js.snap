@@ -2,7 +2,7 @@
 
 exports[`Counter renders without crashing 1`] = `
 <div
-  className="Main"
+  className="Counter"
 >
   <p
     className="Counter-display"
