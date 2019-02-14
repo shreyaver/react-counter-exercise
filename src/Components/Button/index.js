@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Button.css';
 
 // class Button extends Component {
@@ -14,7 +14,7 @@ const Button = (props) => {
     color: '#fff'
   }
   return (
-    <button type="button" className="button" style={buttonStyles} onClick={props.onClick}>
+    <button type="button" className={props.caption} style={buttonStyles} onClick={props.onClick}>
       {props.caption}
     </button>
   );

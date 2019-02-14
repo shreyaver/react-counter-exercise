@@ -1,33 +1,28 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Counter from '.';
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme';
 
-describe('counter', () => {
-  const initialValOfCounter = 1;
-  const wrapper = shallow(<Counter counterVal={initialValOfCounter} incrementVal={2} decrementVal={3} />);
-  beforeEach(() => {
-    wrapper.instance().setState((state, props) => ({
-      counter: initialValOfCounter
-    }));
-  });
+describe('Counter', () => {
+  const props = {
+    counterValue: 0,
+    handleAddClick: jest.fn(),
+    handleSubtractClick: jest.fn()
+  }
+  const wrapper = mount(<Counter {...props} />);
   it('renders without crashing', () => {
-    
-    const counter = renderer.create(<Counter counterVal={1} incrementVal={2} decrementVal={3} />).toJSON();
+    const counter = renderer.create(<Counter {...props} />).toJSON();
     expect(counter).toMatchSnapshot();
   });
-  it('sets initial state of counter to passed value', () => {
-    
-    expect(wrapper.instance().state.counter).toEqual(1);
+  it('sets initial value of counter to passed prop', () => {
+    expect(wrapper.find('.Counter-display').text()).toEqual(`Counter: ${props.counterValue}`);
   });
-  it('increments counter by passed value', () => {
-    
-    wrapper.instance().increment();
-    expect(wrapper.instance().state.counter).toEqual(3);
+  it('calls passed function on clicking "Add" button', () => {
+    wrapper.find('.Add').simulate('click');
+    expect(props.handleAddClick).toHaveBeenCalled();
   });
-  it('decrements counter by passed value', () => {
-    
-    wrapper.instance().decrement();
-    expect(wrapper.instance().state.counter).toEqual(-2);
+  it('calls passed function on clicking "Subtract" button', () => {
+    wrapper.find('.Subtract').simulate('click');
+    expect(props.handleSubtractClick).toHaveBeenCalled();
   });
 });
